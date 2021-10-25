@@ -33,10 +33,3 @@ class Item
     @archived = can_be_archived?
   end
 end
-
-item1 = Item.new(9)
-item2 = Item.new(15)
-p item1
-p item2
-p item1.can_be_archived?
-p item1.move_to_archive?
