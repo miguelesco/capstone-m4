@@ -1,6 +1,6 @@
 class Item
-  def initialize(publish_date, archived: false)
-    @id = Random.rand(1..10_000)
+  def initialize(publish_date, id = Random.rand(1..10_000), archived: false)
+    @id = id
     @publish_date = publish_date
     @archived = archived
   end
