@@ -1,4 +1,9 @@
+require_relative './Classes/movie'
+require_relative './modules/app_module'
+
 class App
+  include Appfunctions
+
   def initialize
     @options = [
       'List all books',
@@ -16,6 +21,8 @@ class App
       'Exit'
     ]
     @run_app = false
+    @movies = []
+    @sources = ['My friend', 'Online Store', 'TV', 'Livestream', 'Physical Store', 'Cinema']
   end
 
   def run
@@ -40,7 +47,7 @@ class App
     when 2
       '2'
     when 3
-      '3'
+      show_movies(@movies)
     when 4
       '4'
     when 5
@@ -50,13 +57,13 @@ class App
     when 7
       '7'
     when 8
-      '8'
+      show_sources(@sources)
     when 9
       '9'
     when 10
       '10'
     when 11
-      '11'
+      create_movie(@movies)
     when 12
       '13'
     when 13
