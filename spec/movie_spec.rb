@@ -13,12 +13,19 @@ describe Movie do
   end
 
   context 'Using Movie can_be_archived? method' do
-    before(:each) do
-      @movie = Movie.new(15, false)
+    it 'Returns true if super returns true, so if publish_date > 10 years' do
+      movie = Movie.new(15, false)
+      expect(movie.can_be_archived?).to be true
     end
 
-    it 'Returns true if super returns true, so if publish_date > 10 years' do
-      expect(@movie.can_be_archived?).to be true
+    it 'Returns true if the movie is silent' do
+      movie = Movie.new(10, true)
+      expect(movie.can_be_archived?).to be true
+    end
+
+    it 'Returns false if super returns false or if the movie is not silent' do
+      movie = Movie.new(10, false)
+      expect(movie.can_be_archived?).to be false
     end
   end
 end
