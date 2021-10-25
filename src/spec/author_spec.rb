@@ -1,11 +1,11 @@
-require_relative '../Classes/author.rb'
-require_relative '../Classes/item.rb'
+require_relative '../Classes/author'
+require_relative '../Classes/item'
 
 describe Author do
   first_name = 'Alex'
   last_name = 'Guzman'
   let(:author) { Author.new(first_name, last_name) }
-  let(:item) {Item.new(11,100)}
+  let(:item) { Item.new(11, 100) }
 
   it 'takes two parameters and return the Author object' do
     expect(author).to be_an_instance_of(Author)
