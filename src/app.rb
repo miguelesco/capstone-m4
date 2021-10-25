@@ -1,3 +1,5 @@
+require_relative 'clases/db'
+
 class App
   def initialize
     @options = [
@@ -15,6 +17,7 @@ class App
       'Add a game',
       'Exit'
     ]
+    # @db = DB.new
     @run_app = false
   end
 
