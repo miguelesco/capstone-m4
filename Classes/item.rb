@@ -1,10 +1,8 @@
-class Item 
-  @@current_id = 0
+class Item
   def initialize(publish_date, archived: false)
-    @id = @@current_id
+    @id = Random.rand(1..10_000)
     @publish_date = publish_date
     @archived = archived
-    @@current_id += 1
   end
 
   def add_genre(genre)
@@ -27,3 +25,8 @@ class Item
     label.items << self unless label.items.include?(self)
   end
 end
+
+item1 = Item.new(20)
+item2 = Item.new(15)
+p item1
+p item2
