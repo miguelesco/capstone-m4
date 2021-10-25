@@ -1,5 +1,4 @@
 class App
-
   def initialize
     @options = [
       'List all books',
