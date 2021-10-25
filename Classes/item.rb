@@ -25,8 +25,3 @@ class Item
     label.items << self unless label.items.include?(self)
   end
 end
-
-item1 = Item.new(20)
-item2 = Item.new(15)
-p item1
-p item2
