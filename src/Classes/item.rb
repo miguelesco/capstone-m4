@@ -26,7 +26,7 @@ class Item
   end
 
   def can_be_archived?
-    @publish_date > 10
+    @publish_date.to_i > 10
   end
 
   def move_to_archive?
