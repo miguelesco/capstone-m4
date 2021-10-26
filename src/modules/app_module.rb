@@ -1,4 +1,5 @@
 require_relative '../Classes/movie'
+require_relative '../Classes/game.rb'
 
 module Appfunctions
   def valid_year?(num)
@@ -36,8 +37,22 @@ module Appfunctions
     list.each { |game| puts "\nPublished in: #{game['publish_date']}, Multiplayer: #{game['multiplayer']}, Last played at: #{game['last_played_at']}" }
   end
 
-  def show_authors
-    list = @db.get_all_data_of('authors')
-    list.each_with_index { |author, index| puts "\n#{index + 1} - #{author['first_name'] author['last_name']}" }
+  def show_authors(list)
+    puts "\nAuthors:"
+    list.each_with_index { |author, index| puts "#{index + 1} - #{author.first_name} #{author.last_name}" }
+  end
+
+  def create_game
+    puts "\nWhat is the publish date of the game? e.g. 1967"
+    year = gets.chomp.to_i
+    puts "\nDoes the game have a multiplayer mode?"
+    puts '1 - Yes'
+    puts '2 - No'
+    multiplayer = gets.chomp.to_i
+    puts "\nWhat is the last date you have played the game? e.g. 1967"
+    last_played = gets.chomp.to_i
+    game = Game.new(multiplayer == 1, last_played, year)
+    data = { multiplayer: multiplayer == 1, last_played_at: last_played, publish_date: year}
+    @db.save(data, 'games')
   end
 end
