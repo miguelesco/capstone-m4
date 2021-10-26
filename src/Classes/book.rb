@@ -8,10 +8,10 @@ class Book < Item
     super(publish_date)
     @publisher = publisher
     @cover_state = cover_state
-    @db = DB.new
-    @data = { publisher: @publisher, cover_state: @cover_state, publish_date: @publish_date }
-    @db.save(@data, 'books')
-    @db.get_all_data_of('books')
+    # @db = DB.new
+    # @data = { publisher: @publisher, cover_state: @cover_state, publish_date: @publish_date }
+    # @db.save(@data, 'books')
+    # @db.get_all_data_of('books')
   end
 
   def can_be_archived?
