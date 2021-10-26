@@ -24,6 +24,7 @@ class App
     ]
     @run_app = false
     @sources = ['My friend', 'Online Store', 'TV', 'Livestream', 'Physical Store', 'Cinema']
+    @genres = ['Death Metal', 'Rap', 'Samba', 'House']
   end
 
   def run
@@ -46,13 +47,13 @@ class App
     when 1
       '1'
     when 2
-      '2'
+      list_albums
     when 3
       show_movies
     when 4
       '4'
     when 5
-      '5'
+      list_genres(@genres)
     when 6
       '6'
     when 7
@@ -62,7 +63,7 @@ class App
     when 9
       '9'
     when 10
-      '10'
+      create_music_album
     when 11
       create_movie
     when 12
