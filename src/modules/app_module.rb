@@ -76,7 +76,7 @@ module Appfunctions
   end
 
   def create_music_album
-    p "\nWhat is the publish date of the album? e.g. 1967"
+    puts "\nWhat is the publish date of the album? e.g. 1967"
     date = gets.chomp
     valid_year?(date)
     puts "\nIs the album on Spotify?"
