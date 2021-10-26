@@ -35,4 +35,9 @@ module Appfunctions
     list = @db.get_all_data_of('games')
     list.each { |game| puts "\nPublished in: #{game['publish_date']}, Multiplayer: #{game['multiplayer']}, Last played at: #{game['last_played_at']}" }
   end
+
+  def show_authors
+    list = @db.get_all_data_of('authors')
+    list.each_with_index { |author, index| puts "\n#{index + 1} - #{author['first_name'] author['last_name']}" }
+  end
 end
