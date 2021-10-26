@@ -1,4 +1,4 @@
-require_relative '../Classes/book.rb'
+require_relative '../Classes/book'
 
 describe Book do
   publisher = 'Harry Potter'

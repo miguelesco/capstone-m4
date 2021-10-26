@@ -1,6 +1,5 @@
-require_relative '../Classes/label.rb'
+require_relative '../Classes/label'
 require_relative '../Classes/item'
-
 
 describe Label do
   title = 'Title'
@@ -16,7 +15,7 @@ describe Label do
     expect(label.color).to eq(color)
   end
 
-  it 'should return an object' do 
+  it 'should return an object' do
     expect(label).to be_an_instance_of(Label)
   end
 
@@ -24,5 +23,4 @@ describe Label do
     label.add_item(item)
     expect(label.items[0]).to eq(item)
   end
-
 end
