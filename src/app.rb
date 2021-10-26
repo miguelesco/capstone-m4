@@ -27,6 +27,7 @@ class App
     @authors = [Author.new('Stephen', 'King'), Author.new('William', 'Shakespeare'),
                 Author.new('J.K', 'Rowling'), Author.new('Akira', 'Toriyama'), Author.new('Masashi', 'Kishimoto')]
     @sources = ['My friend', 'Online Store', 'TV', 'Livestream', 'Physical Store', 'Cinema']
+    @genres = ['Death Metal', 'Rap', 'Samba', 'House']
   end
 
   def run
@@ -49,13 +50,13 @@ class App
     when 1
       list_all_books
     when 2
-      '2'
+      list_albums
     when 3
       show_movies
     when 4
       show_games
     when 5
-      '5'
+      list_genres(@genres)
     when 6
       list_all_labels
     when 7
@@ -65,7 +66,7 @@ class App
     when 9
       add_book
     when 10
-      '10'
+      create_music_album
     when 11
       create_movie
     when 12

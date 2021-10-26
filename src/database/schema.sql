@@ -50,8 +50,6 @@ CREATE TABLE author(
   last_name VARCHAR(30)
 );
 
-
-
 CREATE TABLE item(
   id SERIAL PRIMARY KEY,
   publish_date date,
