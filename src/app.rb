@@ -44,7 +44,7 @@ class App
 
     case selected_option
     when 1
-      '1'
+      list_all_books
     when 2
       '2'
     when 3
@@ -54,13 +54,13 @@ class App
     when 5
       '5'
     when 6
-      '6'
+      list_all_labels
     when 7
       '7'
     when 8
       show_sources(@sources)
     when 9
-      '9'
+      add_book
     when 10
       '10'
     when 11
