@@ -10,8 +10,19 @@ CREATE TABLE source(
 );
 
 CREATE TABLE label(
-  id SERIAL PRIMARY KEY
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(30),
+  color VARCHAR(20),
 );
+
+CREATE TABLE book(
+  id SERIAL PRIMARY KEY,
+  publisher VARCHAR(80),
+  cover_state VARCHAR(20),
+  CONSTRAINT(
+    FOREIGN KEY(item_id) REFERENCES item(id)
+  )
+)
 
 CREATE TABLE author(
   id SERIAL PRIMARY KEY
