@@ -1,8 +1,7 @@
 require_relative './Classes/movie'
-require_relative './Classes/author.rb'
+require_relative './Classes/author'
 require_relative './Classes/db'
 require_relative './modules/app_module'
-
 
 class App
   include Appfunctions
@@ -25,8 +24,8 @@ class App
       'Exit'
     ]
     @run_app = false
-    @authors = [Author.new('Stephen','King'),Author.new('William','Shakespeare'),
-    Author.new('J.K','Rowling'),Author.new('Akira','Toriyama'),Author.new('Masashi','Kishimoto')]
+    @authors = [Author.new('Stephen', 'King'), Author.new('William', 'Shakespeare'),
+                Author.new('J.K', 'Rowling'), Author.new('Akira', 'Toriyama'), Author.new('Masashi', 'Kishimoto')]
     @sources = ['My friend', 'Online Store', 'TV', 'Livestream', 'Physical Store', 'Cinema']
   end
 
