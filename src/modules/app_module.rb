@@ -52,7 +52,11 @@ module Appfunctions
 
   def list_all_labels
     labels = @db.get_all_data_of('labels')
-    labels
+    if labels.empty?
+      puts "\nThere are no labels"
+    else
+      labels.each { |label| puts "\n#{label['name']}" }
+    end
   end
 
 end
