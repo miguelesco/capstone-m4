@@ -8,7 +8,7 @@ describe Movie do
     end
 
     it 'Throw an error if the right arguments are not passed' do
-      expect {Movie.new(15)}.to raise_error(ArgumentError)
+      expect { Movie.new(15) }.to raise_error(ArgumentError)
     end
   end
 
