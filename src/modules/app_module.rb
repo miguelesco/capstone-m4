@@ -18,8 +18,8 @@ module Appfunctions
     puts '1 - Yes'
     puts '2 - No'
     silent = gets.chomp.to_i
-    movie = Movie.new(year, silent: silent == 1)
-    data = { publish_date: movie.publish_date, silent: silent == 1 }
+    Movie.new(year, silent: silent == 1)
+    data = { publish_date: year, silent: silent == 1 }
     @db.save(data, 'movies')
   end
 
