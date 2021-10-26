@@ -47,7 +47,11 @@ module Appfunctions
 
   def list_all_books
     books = @db.get_all_data_of('books')
-    books.each { |book| puts "\nPublished: #{book['publish_date']} years ago, Publisher: #{book['publisher']} and the state is #{book['cover_state']}" }
+    books.each do |book|
+      print "\nPublished: #{book['publish_date']} years ago, Publisher: #{book['publisher']} is in"
+      print " #{book['cover_state']} state"
+      puts ' '
+    end
   end
 
   def list_all_labels
@@ -58,5 +62,4 @@ module Appfunctions
       labels.each { |label| puts "\n#{label['name']}" }
     end
   end
-
 end
