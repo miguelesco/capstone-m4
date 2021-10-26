@@ -8,11 +8,15 @@ class Book < Item
     super(publish_date)
     @publisher = publisher
     @cover_state = cover_state
-    # @db = DB.new
-    # @db.save(publisher: @publisher, cover_state: @cover_state, publish_date: @publish_date, class: self.class.to_s)
+    @db = DB.new
+    @data = {publisher: @publisher, cover_state: @cover_state, publish_date: @publish_date}
+    @db.save(@data, 'books')
+    @db.get_all_data_of('books')
   end
 
   def can_be_archived?
     super || @cover_state == 'bad'
   end
 end
+
+book = Book.new('test', 'bad', 5)

@@ -2,18 +2,44 @@ require 'json'
 class DB
   def initialize
     # Initialize database
-    
-    @books = []
+    @folder_path = '../data'
+    Dir.mkdir(@folder_path) unless Dir.exist?(@folder_path)
+    @file_path = ''
+    @file = ''
+  end
+  
+  def save(data, file_name)
+    check_files(file_name)
+
+    #open file and parse json
+    json = JSON.parse(@file.read)
+
+    #get next id
+    id = json.keys.length + 1
+
+    #merge new data to file_data
+    json[id] = data
+
+    # parse data to json
+    data_json = JSON.generate(json)
+
+    #write data to file
+    File.write(@file_path, data_json)
+
+    true
+  end
+  
+  def get_all_data_of(file_name)
+    check_files(file_name)
+    json_arr = JSON.parse(@file.read).map { |id, data| data.merge({'id' => id}) }
+    json_arr
   end
 
-  def save(**data)
-    # Save data to database
-    @data = data
-    case @data[:class]
-    when 'Book'
-      @books.push(@data)
-    end
+  private
 
-    @books
+  def check_files(file_name)
+    @file_path = "../data/#{file_name}.json"
+    File.write("#{@file_path}", '{}') unless File.exist?(@file_path)
+    @file = File.open(@file_path, 'r')
   end
 end
