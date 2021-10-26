@@ -1,10 +1,13 @@
 require_relative './Classes/movie'
+require_relative './Classes/db'
 require_relative './modules/app_module'
+
 
 class App
   include Appfunctions
 
   def initialize
+    @db = DB.new
     @options = [
       'List all books',
       'List all music albums',
@@ -21,7 +24,6 @@ class App
       'Exit'
     ]
     @run_app = false
-    @movies = []
     @sources = ['My friend', 'Online Store', 'TV', 'Livestream', 'Physical Store', 'Cinema']
   end
 
@@ -47,7 +49,7 @@ class App
     when 2
       '2'
     when 3
-      show_movies(@movies)
+      show_movies
     when 4
       '4'
     when 5
@@ -63,7 +65,7 @@ class App
     when 10
       '10'
     when 11
-      create_movie(@movies)
+      create_movie
     when 12
       '13'
     when 13
