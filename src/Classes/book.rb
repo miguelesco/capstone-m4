@@ -4,12 +4,12 @@ require_relative 'db'
 class Book < Item
   attr_accessor :publisher, :cover_state
 
-  def initialize(publisher, cover_state = '', publish_date)
+  def initialize(publisher, cover_state, publish_date)
     super(publish_date)
     @publisher = publisher
     @cover_state = cover_state
     @db = DB.new
-    @data = {publisher: @publisher, cover_state: @cover_state, publish_date: @publish_date}
+    @data = { publisher: @publisher, cover_state: @cover_state, publish_date: @publish_date }
     @db.save(@data, 'books')
     @db.get_all_data_of('books')
   end
@@ -18,5 +18,3 @@ class Book < Item
     super || @cover_state == 'bad'
   end
 end
-
-book = Book.new('test', 'bad', 5)
