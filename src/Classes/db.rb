@@ -1,4 +1,5 @@
 require 'json'
+
 class DB
   def initialize
     # Initialize database
