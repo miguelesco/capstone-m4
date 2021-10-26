@@ -68,7 +68,7 @@ module Appfunctions
     puts "\nGenres:"
     list.each { |genre| puts "\n#{genre}" }
   end
-      
+
   def list_all_books
     books = @db.get_all_data_of('books')
     books.each do |book|
