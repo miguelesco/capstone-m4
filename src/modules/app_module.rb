@@ -30,4 +30,9 @@ module Appfunctions
     puts "\nSources:"
     list.each { |source| puts "\n#{source}"}
   end
+
+  def show_games
+    list = @db.get_all_data_of('games')
+    list.each { |game| puts "\nPublished in: #{game['publish_date']}, Multiplayer: #{game['multiplayer']}, Last played at: #{game['last_played_at']}" }
+  end
 end
