@@ -3,6 +3,7 @@ require_relative '../Classes/movie'
 module Appfunctions
   def valid_year?(num)
     return unless num.length != 4
+
     puts 'Please enter a valid year'
     year = gets.chomp
     valid_year?(year)
@@ -16,8 +17,8 @@ module Appfunctions
     puts '1 - Yes'
     puts '2 - No'
     silent = gets.chomp.to_i
-    movie = Movie.new(year, silent: silent == 1)
-    data = { publish_date: year, silent: silent == 1}
+    Movie.new(year, silent: silent == 1)
+    data = { publish_date: year, silent: silent == 1 }
     @db.save(data, 'movies')
   end
 
@@ -28,6 +29,6 @@ module Appfunctions
 
   def show_sources(list)
     puts "\nSources:"
-    list.each { |source| puts "\n#{source}"}
+    list.each { |source| puts "\n#{source}" }
   end
 end
