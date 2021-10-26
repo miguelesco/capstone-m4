@@ -1,4 +1,5 @@
 require_relative './Classes/movie'
+require_relative './Classes/author'
 require_relative './Classes/db'
 require_relative './modules/app_module'
 
@@ -23,6 +24,8 @@ class App
       'Exit'
     ]
     @run_app = false
+    @authors = [Author.new('Stephen', 'King'), Author.new('William', 'Shakespeare'),
+                Author.new('J.K', 'Rowling'), Author.new('Akira', 'Toriyama'), Author.new('Masashi', 'Kishimoto')]
     @sources = ['My friend', 'Online Store', 'TV', 'Livestream', 'Physical Store', 'Cinema']
     @genres = ['Death Metal', 'Rap', 'Samba', 'House']
   end
@@ -51,13 +54,13 @@ class App
     when 3
       show_movies
     when 4
-      '4'
+      show_games
     when 5
       list_genres(@genres)
     when 6
       list_all_labels
     when 7
-      '7'
+      show_authors(@authors)
     when 8
       show_sources(@sources)
     when 9
@@ -67,7 +70,7 @@ class App
     when 11
       create_movie
     when 12
-      '13'
+      create_game
     when 13
       exit!
     end
