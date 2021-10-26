@@ -48,8 +48,6 @@ CREATE TABLE author(
   id SERIAL PRIMARY KEY
 );
 
-
-
 CREATE TABLE item(
   id SERIAL PRIMARY KEY,
   publish_date date,
