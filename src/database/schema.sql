@@ -15,6 +15,8 @@ CREATE TABLE label(
 
 CREATE TABLE author(
   id SERIAL PRIMARY KEY
+  first_name VARCHAR(30)
+  last_name VARCHAR(30)
 );
 
 CREATE TABLE item(
