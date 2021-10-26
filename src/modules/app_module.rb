@@ -72,6 +72,8 @@ module Appfunctions
     game = Game.new(multiplayer == 1, last_played, year)
     data = { multiplayer: game.multiplayer, last_played_at: game.last_played_at, publish_date: game.publish_date }
     @db.save(data, 'games')
+  end
+
   def list_all_books
     books = @db.get_all_data_of('books')
     books.each do |book|
