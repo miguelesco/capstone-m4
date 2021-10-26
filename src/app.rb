@@ -2,7 +2,6 @@ require_relative './Classes/movie'
 require_relative './Classes/db'
 require_relative './modules/app_module'
 
-
 class App
   include Appfunctions
 
