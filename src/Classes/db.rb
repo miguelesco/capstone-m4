@@ -1,8 +1,9 @@
 require 'json'
+
 class DB
   def initialize
     # Initialize database
-    @folder_path = '../data'
+    @folder_path = './src/data'
     Dir.mkdir(@folder_path) unless Dir.exist?(@folder_path)
     @file_path = ''
     @file = ''
@@ -37,7 +38,7 @@ class DB
   private
 
   def check_files(file_name)
-    @file_path = "../data/#{file_name}.json"
+    @file_path = "#{@folder_path}/#{file_name}.json"
     File.write(@file_path.to_s, '{}') unless File.exist?(@file_path)
     @file = File.open(@file_path, 'r')
   end
