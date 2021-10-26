@@ -24,4 +24,12 @@ class Item
     @label = label
     label.items << self unless label.items.include?(self)
   end
+
+  def can_be_archived?
+    @publish_date > 10
+  end
+
+  def move_to_archive?
+    @archived = can_be_archived?
+  end
 end
