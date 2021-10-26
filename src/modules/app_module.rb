@@ -61,6 +61,5 @@ module Appfunctions
     else
       labels.each { |label| puts "\n#{label['name']}" }
     end
-
   end
 end
