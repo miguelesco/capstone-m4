@@ -45,7 +45,7 @@ class App
 
     case selected_option
     when 1
-      '1'
+      list_all_books
     when 2
       list_albums
     when 3
@@ -55,13 +55,13 @@ class App
     when 5
       list_genres(@genres)
     when 6
-      '6'
+      list_all_labels
     when 7
       '7'
     when 8
       show_sources(@sources)
     when 9
-      '9'
+      add_book
     when 10
       create_music_album
     when 11
