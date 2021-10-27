@@ -1,7 +1,7 @@
 require_relative '../Classes/movie'
 require_relative '../Classes/author'
 require_relative '../Classes/db'
-require_relative '../Classes/game.rb'
+require_relative '../Classes/game'
 require_relative 'show_items'
 require_relative 'private_methods'
 
