@@ -1,7 +1,12 @@
-require_relative '../Classes/movie'
 require_relative '../Classes/author'
+require_relative '../Classes/book'
 require_relative '../Classes/db'
 require_relative '../Classes/game'
+require_relative '../Classes/genres'
+require_relative '../Classes/label'
+require_relative '../Classes/movie'
+require_relative '../Classes/music'
+require_relative '../Classes/source'
 require_relative 'show_items'
 require_relative 'private_methods'
 

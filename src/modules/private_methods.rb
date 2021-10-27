@@ -1,3 +1,8 @@
+require_relative '../Classes/genres'
+require_relative '../Classes/author'
+require_relative '../Classes/label'
+require_relative '../Classes/source'
+
 module PrivateMethods
   def create_author
     puts "\nSelect a author from the following list or 'a' to add a new author:"
@@ -62,7 +67,7 @@ module PrivateMethods
       @db.save(data, 'labels')
       Label.new(title, color)
     else
-      Label.new(list_of_labels[input.to_i]['title'], list_of_labels[input.to_i]['color'])
+      Label.new(list_of_labels[option_selected.to_i]['title'], list_of_labels[option_selected.to_i]['color'])
     end
   end
 end
