@@ -4,6 +4,7 @@ require_relative '../Classes/music'
 require_relative '../Classes/book'
 require_relative '../Classes/source'
 require_relative '../Classes/genres'
+require_relative '../Classes/label'
 
 module ShowItems
   def show_movies
@@ -17,6 +18,11 @@ module ShowItems
     puts "\nSources:"
     list = @db.get_all_data_of('sources')
     list.each_with_index { |source, i| puts "#{i} - #{source['name']}" }
+  end
+
+  def show_labels(list)
+    puts "\nLabels:"
+    list.each_with_index { |label, i| puts "#{i} - #{label['title']}" }
   end
 
   def show_games
@@ -63,9 +69,10 @@ module ShowItems
     if labels.empty?
       puts "\nThere are no labels"
     else
-      labels.each { |label| puts "\n#{label['name']}" }
+      labels.each { |label| puts "\n Title: #{label['title']} Color: #{label['color']}" }
     end
   end
+  
 end
 
 module CreateItems
@@ -99,15 +106,18 @@ module CreateItems
   end
 
   def add_book
+    label = create_label
+    puts "\nWhen was it published (yyyy-mm-dd)?"
+    publish_date = gets.chomp
     puts "\Who is the publisher of the book?"
     publisher = gets.chomp
-    puts "\nWhich is the status of the cover?"
+    puts "\nWhich is the status of the cover? (ejem. bad or good)"
     cover_state = gets.chomp
-    puts "\nHow many years have the book publish? (ejem. 5)"
-    publish_date = gets.chomp.to_i
     book = Book.new(publisher, cover_state, publish_date)
-    data = { publisher: book.publisher, cover_state: book.cover_state, publish_date: publish_date }
+    book.add_label(label)
+    data = { publisher: book.publisher, cover_state: book.cover_state, publish_date: publish_date, label: label.title }
     @db.save(data, 'books')
+    puts "\n book successfully created!"
   end
 
   def create_game
@@ -122,11 +132,11 @@ module CreateItems
     author = create_author
     game = Game.new(multiplayer == 1, last_played, year)
     game.add_author(author)
-    data = {
-      multiplayer: game.multiplayer,
-      last_played_at: game.last_played_at,
-      publish_date: game.publish_date,
-      author: "#{author.first_name} #{author.last_name}"
+    data = { 
+    multiplayer: game.multiplayer, 
+    last_played_at: game.last_played_at, 
+    publish_date: game.publish_date,
+    author: "#{author.first_name} #{author.last_name}"
     }
     @db.save(data, 'games')
   end
@@ -192,6 +202,24 @@ module CreateItems
       Genre.new(genre_input)
     else
       Genre.new(genres_list[option.to_i]['name'])
+    end
+  end
+
+  def create_label
+    puts "\nSelect a label from the following list or type 'a' to add a new source:"
+    list_of_labels = @db.get_all_data_of('labels')
+    show_labels(list_of_labels)
+    option_selected = gets.chomp
+    if option_selected == 'a'
+      puts "\nWhat is the title of the label?"
+      title = gets.chomp
+      puts "\n What is the color of the label"
+      color = gets.chomp
+      data = { title: title, color: color, items: [] }
+      @db.save(data, 'labels')
+      return label = Label.new(title, color)
+    else 
+      return label = Label.new(list_of_labels[input.to_i]['title'], list_of_labels[input.to_i]['color'])
     end
   end
 end
