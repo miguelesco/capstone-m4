@@ -2,6 +2,7 @@ require_relative '../Classes/movie'
 require_relative '../Classes/game'
 require_relative '../Classes/music'
 require_relative '../Classes/book'
+require_relative '../Classes/author.rb'
 
 module Appfunctions
   def valid_year?(num)
@@ -56,23 +57,36 @@ module Appfunctions
     end
   end
 
-  def show_authors(list)
+  def show_authors
     puts "\nAuthors:"
+    list = @db.get_all_data_of('authors')
     list.each { |author| puts "#{author.first_name} #{author.last_name}" }
   end
 
   def create_game
-    puts "\nWhat is the publish date of the game? e.g. 1967"
-    year = gets.chomp.to_i
-    puts "\nDoes the game have a multiplayer mode?"
+    puts "\nWhen was it published (yyyy-mm-dd)?"
+    year = gets.chomp
+    puts "\nIs the game multiplayer?"
     puts '1 - Yes'
     puts '2 - No'
     multiplayer = gets.chomp.to_i
-    puts "\nWhat is the last date you have played the game? e.g. 1967"
-    last_played = gets.chomp.to_i
+    puts "\nWhen did you play it for last time (yyyy-mm-dd)?"
+    last_played = gets.chomp
     game = Game.new(multiplayer == 1, last_played, year)
     data = { multiplayer: game.multiplayer, last_played_at: game.last_played_at, publish_date: game.publish_date }
     @db.save(data, 'games')
+    puts "\nThe game was created successfully"
+  end
+
+  def create_author
+    puts "\nWhat is the first name of author?"
+    first_name = gets.chomp
+    puts "\nWhat is the last name of author?"
+    last_name = gets.chomp
+    author = Author.new(first_name, last_name)
+    data = { author_id: author.id, first_name: author.first_name, last_name: author.last_name }
+    @db.save(data, 'authors')
+    puts "\nThe author was created successfully"
   end
 
   def create_music_album
