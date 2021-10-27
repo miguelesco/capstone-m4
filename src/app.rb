@@ -24,8 +24,6 @@ class App
       'Exit'
     ]
     @run_app = false
-    @authors = [Author.new('Stephen', 'King'), Author.new('William', 'Shakespeare'),
-                Author.new('J.K', 'Rowling'), Author.new('Akira', 'Toriyama'), Author.new('Masashi', 'Kishimoto')]
     @sources = ['My friend', 'Online Store', 'TV', 'Livestream', 'Physical Store', 'Cinema']
     @genres = ['Death Metal', 'Rap', 'Samba', 'House']
   end
@@ -60,7 +58,7 @@ class App
     when 6
       list_all_labels
     when 7
-      show_authors(@authors)
+      show_authors
     when 8
       show_sources(@sources)
     when 9
@@ -72,6 +70,8 @@ class App
     when 12
       create_game
     when 13
+      create_author
+    when 14
       exit!
     end
   end
