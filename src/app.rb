@@ -21,6 +21,7 @@ class App
       'Add a music album',
       'Add a movie',
       'Add a game',
+      'Add a author',
       'Exit'
     ]
     @run_app = false

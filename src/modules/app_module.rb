@@ -60,7 +60,7 @@ module Appfunctions
   def show_authors
     puts "\nAuthors:"
     list = @db.get_all_data_of('authors')
-    list.each { |author| puts "#{author.first_name} #{author.last_name}" }
+    list.each { |author| puts "#{author['first_name']} #{author['last_name']}" }
   end
 
   def create_game
