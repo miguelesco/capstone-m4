@@ -4,7 +4,8 @@ require_relative './Classes/db'
 require_relative './modules/app_module'
 
 class App
-  include Appfunctions
+  include CreateItems
+  include ShowItems
 
   def initialize
     @db = DB.new
