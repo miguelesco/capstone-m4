@@ -3,11 +3,14 @@ require_relative '../Classes/game'
 require_relative '../Classes/music'
 require_relative '../Classes/book'
 require_relative '../Classes/source'
+require_relative '../Classes/genres'
 
 module ShowItems
   def show_movies
     list = @db.get_all_data_of('movies')
-    list.each { |movie| puts "\nPublished in: #{movie['publish_date']}, Silent: #{movie['silent']}, Source: #{movie['source']}" }
+    list.each do |movie|
+      puts "\nPublished in: #{movie['publish_date']}, Silent: #{movie['silent']}, Source: #{movie['source']}"
+    end
   end
 
   def show_sources
@@ -33,15 +36,17 @@ module ShowItems
     list.each_with_index { |author, index| puts "#{index} - #{author['first_name']} #{author['last_name']}" }
   end
 
-
   def list_albums
     list = @db.get_all_data_of('music_albums')
-    list.each { |album| puts "\nPublished in: #{album['publish_date']}, Album is on spotify: #{album['on_spotify']}" }
+    list.each do |album|
+      puts "\nPublished in: #{album['publish_date']}, is on spotify: #{album['on_spotify']}, Genre: #{album['genre']}"
+    end
   end
 
-  def list_genres(list)
-    puts "\nGenres:"
-    list.each { |genre| puts "\n#{genre}" }
+  def list_genres
+    list = @db.get_all_data_of('genres')
+    puts "\nGenres:\n\n"
+    list.each_with_index { |genre, index| puts "#{index} - #{genre['name']}" }
   end
 
   def list_all_books
@@ -76,7 +81,6 @@ module CreateItems
 
   def create_movie
     source = create_source
-    source
     puts "\nWhat is the publish date of the movie? e.g. 1967"
     year = gets.chomp
     valid_year?(year)
@@ -86,8 +90,8 @@ module CreateItems
     silent = gets.chomp.to_i
     movie = Movie.new(year, silent: silent == 1)
     movie.add_source(source)
-    data = { 
-      publish_date: movie.publish_date, 
+    data = {
+      publish_date: movie.publish_date,
       silent: movie.silent == 1,
       source: movie.source.name
     }
@@ -118,12 +122,12 @@ module CreateItems
     author = create_author
     game = Game.new(multiplayer == 1, last_played, year)
     game.add_author(author)
-    data = { 
-    multiplayer: game.multiplayer, 
-    last_played_at: game.last_played_at, 
-    publish_date: game.publish_date,
-    author: "#{author.first_name} #{author.last_name}"
-   }
+    data = {
+      multiplayer: game.multiplayer,
+      last_played_at: game.last_played_at,
+      publish_date: game.publish_date,
+      author: "#{author.first_name} #{author.last_name}"
+    }
     @db.save(data, 'games')
   end
 
@@ -132,20 +136,22 @@ module CreateItems
     author_list = @db.get_all_data_of('authors')
     show_authors
     input = gets.chomp
-    if input != 'a'
-      Author.new(author_list[input.to_i]['first_name'], author_list[input.to_i]['last_name'])
-    else
+    if input == 'a'
       puts "\nWhat is the first name of author?"
       first_name = gets.chomp
       puts "\nWhat is the last name of author?"
       last_name = gets.chomp
-      data = {first_name: first_name, last_name: last_name}
+      data = { first_name: first_name, last_name: last_name }
       @db.save(data, 'authors')
       Author.new(first_name, last_name)
+    else
+      Author.new(author_list[input.to_i]['first_name'], author_list[input.to_i]['last_name'])
     end
   end
 
   def create_music_album
+    puts "\nSelect a Genre from the list bellow. If the Genre is not in the list type 'a' to add a new one."
+    genre_return = create_genres
     puts "\nWhat is the publish date of the album? e.g. 1967"
     date = gets.chomp
     valid_year?(date)
@@ -154,7 +160,7 @@ module CreateItems
     puts '2 - No'
     spotify = gets.chomp.to_i
     MusicAlbum.new(date, spotify == 1)
-    data = { publish_date: date, on_spotify: spotify == 1 }
+    data = { publish_date: date, on_spotify: spotify == 1, genre: genre_return.name }
     @db.save(data, 'music_albums')
   end
 
@@ -163,14 +169,29 @@ module CreateItems
     sources_list = @db.get_all_data_of('sources')
     show_sources
     input = gets.chomp
-    if input != 'a'
-      Source.new(sources_list[input.to_i]['name'])
-    else
+    if input == 'a'
       puts "\nWhat is your source?"
       new_source = gets.chomp
-      data = {name: new_source}
+      data = { name: new_source }
       @db.save(data, 'sources')
       Source.new(new_source)
+    else
+      Source.new(sources_list[input.to_i]['name'])
+    end
+  end
+
+  def create_genres
+    list_genres
+    option = gets.chomp
+    genres_list = @db.get_all_data_of('genres')
+    if option == 'a'
+      puts "\nInform the genre: "
+      genre_input = gets.chomp
+      data = { name: genre_input }
+      @db.save(data, 'genres')
+      Genre.new(genre_input)
+    else
+      Genre.new(genres_list[option.to_i]['name'])
     end
   end
 end

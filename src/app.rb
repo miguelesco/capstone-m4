@@ -57,7 +57,7 @@ class App
     when 4
       show_games
     when 5
-      list_genres(@genres)
+      list_genres
     when 6
       list_all_labels
     when 7
