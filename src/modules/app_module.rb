@@ -21,13 +21,16 @@ module ShowItems
     list = @db.get_all_data_of('games')
     list.each do |game|
       puts "Published in: #{game['publish_date']}," \
-           " Multiplayer: #{game['multiplayer']}, Last played at: #{game['last_played_at']}"
+           " Multiplayer: #{game['multiplayer']}," \
+           " Last played at: #{game['last_played_at']}" \
+           " Author: #{game['author']}"
     end
   end
 
-  def show_authors(list)
+  def show_authors
     puts "\nAuthors:"
-    list.each { |author| puts "#{author.first_name} #{author.last_name}" }
+    list = @db.get_all_data_of('authors')
+    list.each_with_index { |author, index| puts "#{index} - #{author['first_name']} #{author['last_name']}" }
   end
 
 
@@ -112,9 +115,34 @@ module CreateItems
     multiplayer = gets.chomp.to_i
     puts "\nWhat is the last date you have played the game? e.g. 1967"
     last_played = gets.chomp.to_i
+    author = create_author
     game = Game.new(multiplayer == 1, last_played, year)
-    data = { multiplayer: game.multiplayer, last_played_at: game.last_played_at, publish_date: game.publish_date }
+    game.add_author(author)
+    data = { 
+    multiplayer: game.multiplayer, 
+    last_played_at: game.last_played_at, 
+    publish_date: game.publish_date,
+    author: "#{author.first_name} #{author.last_name}"
+   }
     @db.save(data, 'games')
+  end
+
+  def create_author
+    puts "\nSelect a author from the following list or 'a' to add a new author:"
+    author_list = @db.get_all_data_of('authors')
+    show_authors
+    input = gets.chomp
+    if input != 'a'
+      Author.new(author_list[input.to_i]['first_name'], author_list[input.to_i]['last_name'])
+    else
+      puts "\nWhat is the first name of author?"
+      first_name = gets.chomp
+      puts "\nWhat is the last name of author?"
+      last_name = gets.chomp
+      data = {first_name: first_name, last_name: last_name}
+      @db.save(data, 'authors')
+      Author.new(first_name, last_name)
+    end
   end
 
   def create_music_album
