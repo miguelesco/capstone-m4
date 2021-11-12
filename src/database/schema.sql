@@ -26,26 +26,10 @@ CREATE TABLE item(
   id SERIAL PRIMARY KEY,
   publish_date date,
   archived boolean,
-  genre_id INT,
-  source_id INT,
-  author_id INT,
-  label_id INT,
-  CONSTRAINT genre_id
-    FOREIGN KEY(genre_id)
-      REFERENCES genre(id)
-      ON DELETE CASCADE,
-  CONSTRAINT source_id
-    FOREIGN KEY(source_id)
-      REFERENCES source(id)
-      ON DELETE CASCADE,
-  CONSTRAINT author_id
-    FOREIGN KEY(author_id)
-      REFERENCES author(id)
-      ON DELETE CASCADE,
-  CONSTRAINT label_id
-    FOREIGN KEY(label_id)
-      REFERENCES label(id)
-      ON DELETE CASCADE
+  genre_id INT REFERENCES genre(id),
+  source_id INT REFERENCES source(id),
+  author_id INT REFERENCES author(id),
+  label_id INT REFERENCES label(id),
 );
 
 CREATE TABLE book(
@@ -54,26 +38,10 @@ CREATE TABLE book(
   cover_state VARCHAR(20),
   publish_date date,
   archived boolean,
-  genre_id INT,
-  source_id INT,
-  author_id INT,
-  label_id INT,
-  CONSTRAINT genre_id
-    FOREIGN KEY(genre_id)
-      REFERENCES genre(id)
-      ON DELETE CASCADE,
-  CONSTRAINT source_id
-    FOREIGN KEY(source_id)
-      REFERENCES source(id)
-      ON DELETE CASCADE,
-  CONSTRAINT author_id
-    FOREIGN KEY(author_id)
-      REFERENCES author(id)
-      ON DELETE CASCADE,
-  CONSTRAINT label_id
-    FOREIGN KEY(label_id)
-      REFERENCES label(id)
-      ON DELETE CASCADE
+  genre_id INT REFERENCES genre(id),
+  source_id INT REFERENCES source(id),
+  author_id INT REFERENCES author(id),
+  label_id INT REFERENCES label(id),
 );
 
 CREATE TABLE movies(
@@ -81,54 +49,22 @@ CREATE TABLE movies(
   publish_date date,
   archived boolean,
   silent boolean,
-  genre_id INT,
-  source_id INT,
-  author_id INT,
-  label_id INT,
-  CONSTRAINT genre_id
-    FOREIGN KEY(genre_id)
-      REFERENCES genre(id)
-      ON DELETE CASCADE,
-  CONSTRAINT source_id
-    FOREIGN KEY(source_id)
-      REFERENCES source(id)
-      ON DELETE CASCADE,
-  CONSTRAINT author_id
-    FOREIGN KEY(author_id)
-      REFERENCES author(id)
-      ON DELETE CASCADE,
-  CONSTRAINT label_id
-    FOREIGN KEY(label_id)
-      REFERENCES label(id)
-      ON DELETE CASCADE
+  genre_id INT REFERENCES genre(id),
+  source_id INT REFERENCES source(id),
+  author_id INT REFERENCES author(id),
+  label_id INT REFERENCES label(id),
 );
 
 CREATE TABLE games(
   id SERIAL PRIMARY KEY,
-  genre_id INT,
-  author_id INT,
-  source_id INT,
-  label_id INT,
+  genre_id INT REFERENCES genre(id),
+  source_id INT REFERENCES source(id),
+  author_id INT REFERENCES author(id),
+  label_id INT REFERENCES label(id),
   publish_date date,
   archived boolean,
   multiplayer boolean,
   last_played_at date,
-    CONSTRAINT genre_id
-    FOREIGN KEY(genre_id)
-      REFERENCES genre(id)
-      ON DELETE CASCADE,
-  CONSTRAINT source_id
-    FOREIGN KEY(source_id)
-      REFERENCES source(id)
-      ON DELETE CASCADE,
-  CONSTRAINT author_id
-    FOREIGN KEY(author_id)
-      REFERENCES author(id)
-      ON DELETE CASCADE,
-  CONSTRAINT label_id
-    FOREIGN KEY(label_id)
-      REFERENCES label(id)
-      ON DELETE CASCADE
 );
 
 CREATE TABLE music_album(
@@ -137,26 +73,10 @@ CREATE TABLE music_album(
   publish_date date,
   archived boolean,
   silent boolean,
-  genre_id INT,
-  source_id INT,
-  author_id INT,
-  label_id INT,
-  CONSTRAINT genre_id
-    FOREIGN KEY(genre_id)
-      REFERENCES genre(id)
-      ON DELETE CASCADE,
-  CONSTRAINT source_id
-    FOREIGN KEY(source_id)
-      REFERENCES source(id)
-      ON DELETE CASCADE,
-  CONSTRAINT author_id
-    FOREIGN KEY(author_id)
-      REFERENCES author(id)
-      ON DELETE CASCADE,
-  CONSTRAINT label_id
-    FOREIGN KEY(label_id)
-      REFERENCES label(id)
-      ON DELETE CASCADE
+  genre_id INT REFERENCES genre(id),
+  source_id INT REFERENCES source(id),
+  author_id INT REFERENCES author(id),
+  label_id INT REFERENCES label(id),
 );
 
 CREATE INDEX author_id_asc_item ON item(author_id ASC);
